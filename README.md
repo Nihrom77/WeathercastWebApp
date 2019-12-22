@@ -17,7 +17,9 @@ Frontend - reactjs, echarts.
 
 Бэк будет ожидать запросы по адресу `http://localhost:8080/`
 
-1.2. Запустить фронт:
+1.2. Запустить фронт: 
+
+Перейти в директорию ui
 
 Проверяет и обновляет свои пакеты: `npm install`
 
@@ -27,11 +29,16 @@ Frontend - reactjs, echarts.
 
 Приложение будет доступно по адресу `http://localhost:3000/`
 
-#### 2. В режиме production: (Одно приложение)
+##### 2. В режиме production: (Одно приложение)
 
 Командой `mvn spring-boot:run -Pprod`
 
 Приложение будет доступно по адресу `http://localhost:8080/`
+
+Так же можно собрать jar-файл `mvn clean package -Pprod` 
+и запускать его `java -jar target/webapp-0.0.1-SNAPSHOT.jar`
+
+
 
 
  
