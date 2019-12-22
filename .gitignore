@@ -1,10 +1,15 @@
 #IDE files
 /.idea
+/webapp.iml
 
 /src/main/resources/static/node_modules
 /src/main/resources/static/.babelrc
 
 ui/node_modules
+ui/node
+ui/build
+ui/public
+
 
 ui/.pnp
 ui/.pnp.js

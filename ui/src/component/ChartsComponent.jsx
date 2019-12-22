@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import ReactEcharts from "echarts-for-react";
 
+/**
+ * Компонент, рисующий график сглаженных кривых на основе двух списков - данных по оси X и по оси Y.
+ */
 class ChartsComponent extends Component {
 
 
@@ -16,7 +19,6 @@ class ChartsComponent extends Component {
                     left: "5%"
                 },
                 tooltip: {backgroundColor: "#555", borderWidth: 0, padding: 10},
-
 
                 xAxis: [
                     {

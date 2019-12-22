@@ -3,13 +3,18 @@ package com.croc.webapp.domain;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Модель данных для графика сглаженных кривых.
+ */
 public class ChartModel {
-    private  Integer id;
+    private Integer id;
+    //Спиок дат - ось X
     private List<LocalDate> dates;
+    //Список значений - ось Y
     private List<Integer> metric;
     private Metric metricName;
 
-    public ChartModel(Integer id, List<LocalDate> dates, List<Integer> metrics, Metric metric){
+    public ChartModel(Integer id, List<LocalDate> dates, List<Integer> metrics, Metric metric) {
         this.id = id;
         this.dates = dates;
         this.metric = metrics;

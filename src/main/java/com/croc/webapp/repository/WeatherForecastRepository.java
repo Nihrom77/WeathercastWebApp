@@ -8,10 +8,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
+ * Репозиторий, реализуемый JPA-механизмом.
  * JpaRepository implements CrudRepository
  */
 public interface WeatherForecastRepository extends JpaRepository<WeatherForecast, Integer> {
-//    List<WeatherForecast> findByDateTime(final LocalDateTime datetime);
     List<WeatherForecast> findByDateTimeBetween (final LocalDate startDatetime, final LocalDate endDatetime);
 
 }

@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 
-public class RequestObject
+/**
+ * Класс, содержащий параметры запроса для обновления данных на графиках
+ */
+public class RequestWeatherObject
 {
     private int id;
 

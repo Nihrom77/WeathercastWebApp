@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-
+/**
+ * Класс, посылающий запросы в бекэнд.
+ */
 class ApiService {
 
     fetchWeather(daysAndLocation) {

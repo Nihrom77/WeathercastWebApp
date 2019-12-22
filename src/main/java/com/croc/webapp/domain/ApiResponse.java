@@ -1,6 +1,9 @@
 package com.croc.webapp.domain;
 
-
+/**
+ * Класс, для пересылки http-ответа
+ * @param <T>
+ */
 public class ApiResponse<T> {
 
     private int status;

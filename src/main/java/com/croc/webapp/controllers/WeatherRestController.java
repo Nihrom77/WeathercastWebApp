@@ -3,19 +3,16 @@ package com.croc.webapp.controllers;
 import com.croc.webapp.domain.ApiResponse;
 import com.croc.webapp.domain.ChartModel;
 import com.croc.webapp.domain.Metric;
-import com.croc.webapp.domain.RequestObject;
+import com.croc.webapp.domain.RequestWeatherObject;
 import com.croc.webapp.domain.WeatherForecast;
 import com.croc.webapp.repository.WeatherForecastRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
@@ -25,28 +22,38 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@CrossOrigin(origins = "*", maxAge = 3600) @RestController public class WeatherRestController {
+/**
+ * Контроллер для REST-запросов
+ *
+ */
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RestController
+public class WeatherRestController {
 
-    WeatherForecastRepository repository;
+    private WeatherForecastRepository repository;
 
-    @Autowired public WeatherRestController(WeatherForecastRepository repository) {
+    @Autowired
+    public WeatherRestController(WeatherForecastRepository repository) {
         this.repository = repository;
     }
 
 
+    /**
+     * Запрос на получение погодныъ сводок.
+     * @param requestObject Объект, содержащий параметры запроса
+     * @return Объект, содержащий параметры ответа
+     */
     @RequestMapping(value = "weather", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ApiResponse<WeatherForecast> getTemperature(@RequestBody RequestObject requestObject) {
-        System.out.println("requestObj: " + requestObject);
-
+    public ApiResponse<WeatherForecast> getWeatherForecast(@RequestBody RequestWeatherObject requestObject) {
         List<WeatherForecast> weatherForecasts =
-            repository.findByDateTimeBetween(requestObject.getDateFrom(), requestObject.getDateTo());
+                repository.findByDateTimeBetween(requestObject.getDateFrom(), requestObject.getDateTo());
         List<LocalDate> daysRange;
 
         if (requestObject.getDateTo().isAfter(requestObject.getDateFrom()) || requestObject.getDateTo()
-            .isEqual(requestObject.getDateFrom())) {
+                .isEqual(requestObject.getDateFrom())) {
             long numOfDays = ChronoUnit.DAYS.between(requestObject.getDateFrom(), requestObject.getDateTo());
             daysRange = Stream.iterate(requestObject.getDateFrom(), date -> date.plusDays(1)).limit(numOfDays)
-                .collect(Collectors.toList());
+                    .collect(Collectors.toList());
         } else {
             daysRange = new ArrayList<>();
         }
@@ -72,12 +79,15 @@ import java.util.stream.Stream;
     }
 
 
-
+    /**
+     * Запрос на получение списка городов
+     * @return Объект, содержащий параметры ответа и список городов
+     */
     @RequestMapping(value = "cities", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse<List<String>> listCities() {
-        List<String> l = new ArrayList<>();
-        l.add("Москва");
-        return new ApiResponse<>(HttpStatus.OK.value(), "User list fetched successfully.", l);
+        List<String> cities = new ArrayList<>();
+        cities.add("Москва");
+        return new ApiResponse<>(HttpStatus.OK.value(), "User list fetched successfully.", cities);
     }
 
 }

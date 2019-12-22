@@ -9,6 +9,10 @@ import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import {KeyboardDatePicker, MuiPickersUtilsProvider,} from '@material-ui/pickers';
 
+/**
+ * Компонент, отображающий основную страницу.
+ * Содержит имя, список дат, выпадающий список городов и компоненты графиков.
+ */
 class ListWeatherComponent extends Component {
 
     constructor(props) {
